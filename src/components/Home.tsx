@@ -4,7 +4,6 @@
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { tools } from "@/data/toolsData";
-import { iconMap } from "@/data/svgdata";
 import Link from "next/link";
 import { GROUPS, getGroup, trendingTools } from "@/lib/toolMeta";
 import { searchTools, highlightParts } from "@/lib/search";
@@ -20,6 +19,8 @@ const Home = () => {
   const [search,   setSearch]   = useState("");
   const [activeTab, setActiveTab] = useState("All");
   const [activeIndex, setActiveIndex] = useState(0);
+  const [visibleCategoryCount, setVisibleCategoryCount] = useState(1);
+  const categoryLoadRef = useRef<HTMLDivElement>(null);
 
   // Open /?q=jwt with the search already filled in.
   useEffect(() => {
@@ -77,7 +78,25 @@ const Home = () => {
   }, [searching, activeTab]);
 
   const showGrouped = groupedByCategory !== null;
+  const categoryEntries = groupedByCategory ? Object.entries(groupedByCategory) : [];
   const trending = useMemo(() => trendingTools(), []);
+
+  useEffect(() => {
+    setVisibleCategoryCount(1);
+  }, [activeTab, query]);
+
+  useEffect(() => {
+    const target = categoryLoadRef.current;
+    if (!showGrouped || visibleCategoryCount >= categoryEntries.length || !target) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      setVisibleCategoryCount((count) => Math.min(count + 1, categoryEntries.length));
+    });
+
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, [showGrouped, visibleCategoryCount, categoryEntries.length]);
 
   const clearAll = () => { setSearch(""); setActiveTab("All"); };
 
@@ -206,15 +225,15 @@ const Home = () => {
                   <span className="hp-cat-count">{trending.length} tools</span>
                 </div>
                 <div className="hp-grid">
-                  {trending.map((tool, i) => (
-                    <ToolCard key={tool.id} tool={tool} meta={metaFor(getGroup(tool).label)} delay={i * 40} />
+                  {trending.map((tool) => (
+                    <ToolCard key={tool.id} tool={tool} meta={metaFor(getGroup(tool).label)} />
                   ))}
                 </div>
               </section>
             )}
 
             {/* ── Grouped by category (default view) ── */}
-            {showGrouped && Object.entries(groupedByCategory).map(([cat, catTools]) => {
+            {showGrouped && categoryEntries.slice(0, visibleCategoryCount).map(([cat, catTools]) => {
               const meta = metaFor(cat);
               return (
                 <section key={cat} id={meta.id} className="hp-category-section">
@@ -228,13 +247,17 @@ const Home = () => {
                   </div>
 
                   <div className="hp-grid">
-                    {catTools.map((tool, i) => (
-                      <ToolCard key={tool.id} tool={tool} meta={meta} delay={i * 40} />
+                    {catTools.map((tool) => (
+                      <ToolCard key={tool.id} tool={tool} meta={meta} />
                     ))}
                   </div>
                 </section>
               );
             })}
+
+            {showGrouped && visibleCategoryCount < categoryEntries.length && (
+              <div ref={categoryLoadRef} className="hp-category-loader" aria-hidden="true" />
+            )}
 
             {/* ── Ranked search results ── */}
             {!showGrouped && searching && hits.length > 0 && (
@@ -255,8 +278,8 @@ const Home = () => {
             {/* ── Category tab, no search ── */}
             {!showGrouped && !searching && (
               <div className="hp-grid">
-                {tabTools.map((tool, i) => (
-                  <ToolCard key={tool.id} tool={tool} meta={metaFor(getGroup(tool).label)} delay={i * 30} />
+                {tabTools.map((tool) => (
+                  <ToolCard key={tool.id} tool={tool} meta={metaFor(getGroup(tool).label)}  />
                 ))}
               </div>
             )}
@@ -310,7 +333,7 @@ function Highlight({ text, terms }: { text: string; terms?: string[] }) {
 }
 
 /* ── Tool Card ── */
-function ToolCard({ tool, meta, delay = 0, terms, active, searchMode }: any) {
+function ToolCard({ tool, meta, terms, active, searchMode }: any) {
   return (
     <Link
       href={`/${tool.slug}`}
@@ -318,11 +341,12 @@ function ToolCard({ tool, meta, delay = 0, terms, active, searchMode }: any) {
       role={searchMode ? "option" : undefined}
       aria-selected={searchMode ? !!active : undefined}
       className={`hp-card${active ? " hp-card-active" : ""}`}
-      style={searchMode ? undefined : { animationDelay: `${delay}ms` }}
     >
       <div className="hp-card-top">
         <div className="hp-card-icon" style={{ background: meta.bg, borderColor: meta.border }}>
-          {iconMap[tool.icon] || iconMap.hashtag}
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z" />
+          </svg>
         </div>
         <span
           className="hp-card-cat"
