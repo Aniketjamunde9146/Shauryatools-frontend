@@ -1,0 +1,218 @@
+/* Snake popup shown while an AI result is generating.
+   Mobile first: a bottom sheet on phones, a small corner card on wider screens.
+   It is non-blocking, so the page stays usable behind it. */
+
+.sl-panel {
+  position: fixed;
+  left: 8px;
+  right: 8px;
+  bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  z-index: 900;
+  max-height: 88vh;
+  overflow-y: auto;
+  background: var(--white);
+  border: 1px solid var(--grey-2);
+  border-radius: 18px;
+  box-shadow: var(--shadow-hover);
+  padding: 14px;
+  font-family: var(--font-body);
+  color: var(--black);
+  animation: sl-rise 0.22s ease-out;
+}
+
+.sl-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.sl-kicker {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--grey-3);
+  margin: 0 0 2px;
+}
+
+.sl-title {
+  font-size: 1.02rem;
+  font-weight: 800;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.sl-hide {
+  min-height: 40px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid var(--grey-2);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.sl-panel[hidden] {
+  display: none;
+}
+
+.sl-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.sl-status {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--grey-4);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.sl-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 0.9rem;
+  color: var(--grey-4);
+}
+
+.sl-stats strong {
+  color: var(--black);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The board keeps a square shape and fills the card width, up to 280px on phones. */
+.sl-board {
+  position: relative;
+  width: min(100%, 280px);
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--grey-2);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.sl-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.sl-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(248, 248, 246, 0.82);
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.sl-overlay p {
+  margin: 0;
+}
+
+.sl-btn {
+  min-height: 44px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--black);
+  color: var(--white);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Arrow pad: large touch targets (56px) with a fixed 3x3 grid. */
+.sl-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 56px);
+  grid-template-rows: repeat(3, 56px);
+  gap: 6px;
+}
+
+.sl-key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--grey-2);
+  border-radius: 12px;
+  background: var(--white);
+  color: var(--black);
+  font: inherit;
+  font-size: 1.1rem;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sl-key:active {
+  background: var(--grey-1);
+  transform: scale(0.96);
+}
+
+.sl-key-pause {
+  font-size: 0.9rem;
+  color: var(--grey-4);
+}
+
+.sl-hint {
+  margin: 0;
+  font-size: 0.76rem;
+  color: var(--grey-3);
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* Small pill shown when the game is hidden but the request is still running. */
+.sl-pill {
+  position: fixed;
+  right: 14px;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  z-index: 900;
+  min-height: 48px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--grey-2);
+  background: var(--white);
+  color: var(--black);
+  box-shadow: var(--shadow-hover);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Wider screens: a fixed card in the bottom-right corner that does not cover the page. */
+@media (min-width: 720px) {
+  .sl-panel {
+    left: auto;
+    right: 24px;
+    bottom: 24px;
+    width: 340px;
+  }
+}
+
+@keyframes sl-rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sl-panel { animation: none; }
+  .sl-key:active { transform: none; }
+}

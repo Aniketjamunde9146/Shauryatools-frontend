@@ -1,0 +1,138 @@
+.tool-seo-content {
+  border-top: 1px solid rgba(148, 163, 184, 0.16);
+  background: #f8fafc;
+  color: #334155;
+  padding: 56px 24px 64px;
+}
+
+.tool-seo-inner {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.tool-seo-content h2 {
+  margin: 0 0 16px;
+  color: #0f172a;
+  font-size: clamp(1.5rem, 3vw, 2.15rem);
+  line-height: 1.2;
+}
+
+.tool-seo-content h3 {
+  margin: 0 0 9px;
+  color: #0f172a;
+  font-size: 1.05rem;
+}
+
+.tool-seo-content p {
+  max-width: 78ch;
+  margin: 0;
+  font-size: 0.96rem;
+  line-height: 1.75;
+}
+
+.tool-seo-block {
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.tool-seo-block details {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 13px 0;
+}
+
+.tool-seo-block summary {
+  color: #0f172a;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.tool-seo-block details p {
+  padding-top: 10px;
+  color: #475569;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 680px) {
+  .tool-seo-content {
+    padding: 40px 18px 48px;
+  }
+
+}
+
+.tool-seo-crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.tool-seo-crumbs li + li::before {
+  content: "/";
+  margin-right: 8px;
+  color: #cbd5e1;
+}
+
+.tool-seo-crumbs a {
+  color: #475569;
+  text-decoration: none;
+}
+
+.tool-seo-crumbs a:hover,
+.tool-seo-crumbs a:focus-visible {
+  color: #0f172a;
+  text-decoration: underline;
+}
+
+.tool-seo-steps {
+  margin: 0;
+  padding-left: 1.25rem;
+  line-height: 1.75;
+  font-size: 0.96rem;
+}
+
+.tool-seo-steps li + li {
+  margin-top: 4px;
+}
+
+.tool-seo-related {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tool-seo-related a {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: 100%;
+  padding: 12px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #fff;
+  color: inherit;
+  text-decoration: none;
+}
+
+.tool-seo-related a:hover,
+.tool-seo-related a:focus-visible {
+  border-color: #94a3b8;
+}
+
+.tool-seo-related strong {
+  color: #0f172a;
+  font-size: 0.95rem;
+}
+
+.tool-seo-related span {
+  color: #64748b;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}

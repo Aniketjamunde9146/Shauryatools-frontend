@@ -1,0 +1,22 @@
+/* In the page flow (not fixed), so it never covers a tool's title or content.
+   Top padding clears the 64px fixed navbar. */
+.bk-bar { max-width: 1240px; margin: 0 auto; padding: 76px 20px 0; }
+.bk-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 14px 0 10px;
+  border-radius: 999px;
+  border: 1px solid var(--grey-2, #e4e4e0);
+  background: transparent;
+  color: var(--grey-4, #5a5a54);
+  font-family: var(--font-head, "Manrope", sans-serif);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.bk-back:hover { color: var(--black, #0a0a0a); border-color: var(--black, #0a0a0a); }
+.bk-back:focus-visible { outline: 2px solid var(--black, #0a0a0a); outline-offset: 2px; }
+@media (max-width: 720px) { .bk-bar { padding: 72px 14px 0; } }

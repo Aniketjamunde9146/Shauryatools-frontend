@@ -1,0 +1,184 @@
+/* ============================================================
+   Site theme: one root theme for every page.
+   - Neutral colours come from the root variables below, whatever a tool's own CSS declares.
+   - Tool pages have a transparent background, so the page shows the root background.
+   - The back button sits in the page flow, so the top padding of a tool page is small.
+   ============================================================ */
+html:root {
+  --white: #ffffff;
+  --black: #0a0a0a;
+  --off: #f8f8f6;
+  --grey-1: #f2f2ef;
+  --grey-2: #e4e4e0;
+  --grey-3: #9a9a94;
+  --grey-4: #5a5a54;
+  --radius: 14px;
+}
+
+/* One palette for all tools: every accent colour is the root black on neutral surfaces.
+   Green (success) and red (error) keep their meaning. */
+html:root {
+  --blue: #0a0a0a;
+  --blue-bg: #f2f2ef;
+  --blue-bd: #e4e4e0;
+  --violet: #0a0a0a;
+  --violet-bg: #f2f2ef;
+  --violet-bd: #e4e4e0;
+  --orange: #0a0a0a;
+  --orange-bg: #f2f2ef;
+  --orange-bd: #e4e4e0;
+  --amber: #0a0a0a;
+  --amber-bg: #f2f2ef;
+  --amber-bd: #e4e4e0;
+  --emerald: #0a0a0a;
+  --emerald-bg: #f2f2ef;
+  --emerald-bd: #e4e4e0;
+  --teal: #0a0a0a;
+  --teal-bg: #f2f2ef;
+  --teal-bd: #e4e4e0;
+  --rose: #0a0a0a;
+  --rose-bg: #f2f2ef;
+  --rose-bd: #e4e4e0;
+  --indigo: #0a0a0a;
+  --indigo-bg: #f2f2ef;
+  --indigo-bd: #e4e4e0;
+  --sky: #0a0a0a;
+  --sky-bg: #f2f2ef;
+  --sky-bd: #e4e4e0;
+  --li-blue: #0a0a0a;
+  --li-blue-bg: #f2f2ef;
+  --li-blue-bd: #e4e4e0;
+  --fg-violet: #0a0a0a;
+  --fg-violet-bg: #f2f2ef;
+  --fg-violet-bd: #e4e4e0;
+  --fg-amber: #0a0a0a;
+  --fg-amber-bg: #f2f2ef;
+  --fg-amber-bd: #e4e4e0;
+  --fg-indigo: #0a0a0a;
+  --fg-indigo-bg: #f2f2ef;
+  --fg-indigo-bd: #e4e4e0;
+  --fg-accent: #0a0a0a;
+  --fg-accent-bg: #f2f2ef;
+  --fg-accent-bd: #e4e4e0;
+  --accent: #0a0a0a;
+  --emerald-dk: #0a0a0a;
+  --fg-accent-dk: #0a0a0a;
+  --code-bg: #f2f2ef;
+  --font-mono: var(--font-manrope), "Manrope", monospace;
+}
+html, body { background: var(--white); }
+
+#root .ac-page,
+#root .b64-page,
+#root .bmi-page,
+#root .ce-page,
+#root .cm-page,
+#root .col-page,
+#root .cp-page,
+#root .cp2-page,
+#root .cpe-page,
+#root .ctd-page,
+#root .eb-page,
+#root .ec-page,
+#root .emi-page,
+#root .fc-page,
+#root .gi-page,
+#root .gst-page,
+#root .ib-page,
+#root .ic-page,
+#root .iconv-page,
+#root .imv-page,
+#root .iqe-page,
+#root .ir-page,
+#root .isc-page,
+#root .itc-page,
+#root .itp-page,
+#root .jd-page,
+#root .jf-page,
+#root .jyc-page,
+#root .kd-page,
+#root .lg-page,
+#root .lpg-page,
+#root .mc-page,
+#root .mg-page,
+#root .mp-page,
+#root .mt-page,
+#root .pg-page,
+#root .ppm-page,
+#root .psa-page,
+#root .pt-page,
+#root .qr-page,
+#root .rb-page,
+#root .rx-page,
+#root .sg-page,
+#root .sgc-page,
+#root .sip-page,
+#root .sm-page,
+#root .sst-page,
+#root .tt-page,
+#root .uc-page,
+#root .ue-page,
+#root .wm-page,
+#root .ws-page,
+#root .nt-wrap,
+#root .pl-wrap {
+  background: transparent !important;
+  min-height: 0 !important;
+  padding-top: 12px !important;
+}
+@media (max-width: 720px) {
+  #root .ac-page,
+  #root .b64-page,
+  #root .bmi-page,
+  #root .ce-page,
+  #root .cm-page,
+  #root .col-page,
+  #root .cp-page,
+  #root .cp2-page,
+  #root .cpe-page,
+  #root .ctd-page,
+  #root .eb-page,
+  #root .ec-page,
+  #root .emi-page,
+  #root .fc-page,
+  #root .gi-page,
+  #root .gst-page,
+  #root .ib-page,
+  #root .ic-page,
+  #root .iconv-page,
+  #root .imv-page,
+  #root .iqe-page,
+  #root .ir-page,
+  #root .isc-page,
+  #root .itc-page,
+  #root .itp-page,
+  #root .jd-page,
+  #root .jf-page,
+  #root .jyc-page,
+  #root .kd-page,
+  #root .lg-page,
+  #root .lpg-page,
+  #root .mc-page,
+  #root .mg-page,
+  #root .mp-page,
+  #root .mt-page,
+  #root .pg-page,
+  #root .ppm-page,
+  #root .psa-page,
+  #root .pt-page,
+  #root .qr-page,
+  #root .rb-page,
+  #root .rx-page,
+  #root .sg-page,
+  #root .sgc-page,
+  #root .sip-page,
+  #root .sm-page,
+  #root .sst-page,
+  #root .tt-page,
+  #root .uc-page,
+  #root .ue-page,
+  #root .wm-page,
+  #root .ws-page,
+  #root .nt-wrap,
+  #root .pl-wrap { padding-top: 8px !important; }
+}

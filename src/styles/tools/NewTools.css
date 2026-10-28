@@ -1,0 +1,39 @@
+/* Shared styles for the newer tools. Prefix nt- keeps them separate from the older tool CSS. */
+.nt-wrap { max-width: 880px; margin: 0 auto; padding: 120px 20px 56px; }
+.nt-head h1 { font-size: 2rem; font-weight: 800; color: #0f172a; margin: 0 0 8px; letter-spacing: -0.02em; }
+.nt-head p { color: #64748b; margin: 0 0 24px; line-height: 1.6; }
+.nt-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 22px; box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04); }
+.nt-stack { display: flex; flex-direction: column; gap: 18px; }
+.nt-label { display: block; font-size: 0.8rem; font-weight: 700; color: #334155; margin: 0 0 8px; letter-spacing: 0.02em; }
+.nt-input, .nt-textarea {
+  width: 100%; box-sizing: border-box; border: 1px solid #cbd5e1; border-radius: 12px;
+  padding: 11px 14px; font: inherit; font-size: 0.95rem; color: #0f172a; background: #fff;
+}
+.nt-textarea { min-height: 160px; resize: vertical; line-height: 1.5; }
+.nt-input:focus, .nt-textarea:focus { outline: 2px solid #6c47ff; outline-offset: 1px; border-color: transparent; }
+.nt-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.nt-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 18px; }
+.nt-stat { border: 1px solid #e2e8f0; border-radius: 14px; padding: 14px; background: #f8fafc; }
+.nt-stat b { display: block; font-size: 1.4rem; color: #0f172a; }
+.nt-stat span { font-size: 0.8rem; color: #64748b; }
+.nt-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.nt-btn {
+  display: inline-flex; align-items: center; gap: 6px; border: 1px solid #cbd5e1; background: #fff;
+  color: #334155; border-radius: 10px; padding: 8px 14px; font: inherit; font-size: 0.875rem;
+  font-weight: 600; cursor: pointer; transition: border-color 0.15s ease, color 0.15s ease;
+}
+.nt-btn:hover { border-color: #6c47ff; color: #6c47ff; }
+.nt-btn.is-on { background: #6c47ff; border-color: #6c47ff; color: #fff; }
+.nt-btn:focus-visible { outline: 2px solid #6c47ff; outline-offset: 2px; }
+.nt-preview { border-radius: 14px; padding: 24px; border: 1px solid #e2e8f0; font-size: 1.15rem; line-height: 1.5; }
+.nt-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+.nt-table td { padding: 10px 6px; border-bottom: 1px solid #f1f5f9; color: #334155; }
+.nt-pill { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; }
+.nt-pass { background: #ecfdf5; color: #047857; }
+.nt-fail { background: #fef2f2; color: #b91c1c; }
+.nt-error { color: #b91c1c; font-size: 0.9rem; margin: 8px 0 0; }
+.nt-muted { color: #64748b; font-size: 0.85rem; margin: 8px 0 0; }
+@media (max-width: 600px) {
+  .nt-wrap { padding-top: 100px; }
+  .nt-fields { grid-template-columns: 1fr; }
+}

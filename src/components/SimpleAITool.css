@@ -1,0 +1,51 @@
+/* Uses the site's root theme variables (Home.css). Transparent background so the page shows through. */
+.st-page { background: transparent; padding: 12px 20px 56px; font-family: var(--font-body); color: var(--black); }
+.st-inner { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+.st-head { padding: 8px 0 4px; }
+.st-title { font-family: var(--font-head); font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; }
+.st-sub { margin-top: 8px; color: var(--grey-4); font-size: 0.98rem; line-height: 1.55; }
+.st-card { background: transparent; border: 1px solid var(--grey-2); border-radius: var(--radius); padding: 18px; display: flex; flex-direction: column; gap: 14px; }
+.st-label { font-size: 0.82rem; font-weight: 700; color: var(--grey-4); }
+.st-textarea, .st-select {
+  width: 100%; font: inherit; font-size: 16px; color: inherit; background: transparent;
+  border: 1px solid var(--grey-2); border-radius: 10px; padding: 11px 12px; outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.st-textarea { resize: vertical; min-height: 120px; line-height: 1.5; }
+.st-textarea:focus, .st-select:focus { border-color: var(--black); box-shadow: 0 0 0 3px rgba(10,10,10,.08); }
+.st-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.st-row-one { grid-template-columns: 1fr; }
+.st-field { display: flex; flex-direction: column; gap: 6px; }
+.st-btn {
+  height: 46px; border: 0; border-radius: 10px; background: var(--black); color: var(--white);
+  font: inherit; font-weight: 700; cursor: pointer; transition: opacity .15s ease, transform .15s ease;
+}
+.st-btn:hover:not(:disabled) { transform: translateY(-1px); }
+.st-btn:disabled { opacity: .6; cursor: progress; }
+.st-error { color: #b91c1c; font-size: 0.9rem; }
+.st-result-bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.st-actions { display: flex; gap: 8px; }
+.st-mini { height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--grey-2); background: transparent; color: inherit; font: inherit; font-size: 0.82rem; font-weight: 600; cursor: pointer; }
+.st-mini:hover:not(:disabled) { border-color: var(--black); }
+.st-output { white-space: pre-wrap; word-break: break-word; font: inherit; line-height: 1.65; font-size: 0.98rem; margin: 0; }
+.st-btn:focus-visible, .st-mini:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; }
+@media (max-width: 520px) { .st-row { grid-template-columns: 1fr; } .st-page { padding: 0 14px 40px; } }
+
+/* Per-tool fields (src/lib/aiTools.ts). One column on phones; two columns on wider screens.
+   Textareas always take the full width. Input text is 16px so iOS does not zoom in. */
+.st-fields { display: grid; grid-template-columns: 1fr; gap: 14px; }
+.st-field { min-width: 0; }
+.st-field-wide { grid-column: 1 / -1; }
+.st-input {
+  width: 100%; min-height: 44px; font: inherit; font-size: 16px; color: inherit; background: transparent;
+  border: 1px solid var(--grey-2); border-radius: 10px; padding: 10px 12px; outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.st-input:focus { border-color: var(--black); box-shadow: 0 0 0 3px rgba(10,10,10,.08); }
+.st-select { min-height: 44px; }
+.st-required { color: #b91c1c; }
+.st-field-error { color: #b91c1c; font-size: 0.82rem; margin: 2px 0 0; }
+.st-input[aria-invalid="true"], .st-select[aria-invalid="true"], .st-textarea[aria-invalid="true"] { border-color: #b91c1c; }
+@media (min-width: 720px) {
+  .st-fields { grid-template-columns: 1fr 1fr; }
+}

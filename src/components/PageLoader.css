@@ -1,0 +1,68 @@
+/* Route-level skeleton. Shown while a page's code and data load. */
+.pl-wrap {
+  min-height: 70vh;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 120px 20px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pl-bar,
+.pl-field,
+.pl-cell {
+  border-radius: 12px;
+  background: linear-gradient(90deg, #eef2f7 0%, #f8fafc 50%, #eef2f7 100%);
+  background-size: 200% 100%;
+  animation: pl-shimmer 1.4s ease-in-out infinite;
+}
+
+.pl-bar { height: 14px; }
+.pl-title { height: 36px; width: 62%; border-radius: 10px; }
+.pl-sub { width: 84%; }
+.pl-w30 { width: 30%; }
+.pl-w40 { width: 40%; }
+.pl-w70 { width: 70%; }
+
+.pl-card {
+  margin-top: 12px;
+  padding: 22px;
+  border-radius: 18px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pl-field { height: 120px; }
+
+.pl-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.pl-cell { height: 56px; }
+
+.pl-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@keyframes pl-shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+@media (max-width: 560px) {
+  .pl-row { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-bar, .pl-field, .pl-cell { animation: none; }
+}
