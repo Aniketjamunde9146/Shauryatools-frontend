@@ -1,6 +1,6 @@
 import Script from "next/script";
 
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID ?? "G-EHLC00KN7H";
+const GA_ID = "G-EHLC00KN7H";
 const CONSENT_KEY = "shaurya-consent-v1"; // same key ConsentBanner writes
 
 // Consent starts as "denied" unless the visitor already accepted on a previous visit.
