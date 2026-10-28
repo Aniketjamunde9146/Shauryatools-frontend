@@ -30,6 +30,9 @@ export const metadata: Metadata = {
   description: DEFAULT_DESCRIPTION,
   applicationName: SITE_NAME,
   authors: [{ name: SITE_NAME }],
+  verification: {
+    google: "uqt1eh3ismflyFYwsl5PR_KmPQXNn1s7drDOZC9WAUU",
+  },
   robots: {
     index: true,
     follow: true,
