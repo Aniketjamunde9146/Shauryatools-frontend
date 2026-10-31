@@ -28,6 +28,25 @@
 .st-mini { height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--grey-2); background: transparent; color: inherit; font: inherit; font-size: 0.82rem; font-weight: 600; cursor: pointer; }
 .st-mini:hover:not(:disabled) { border-color: var(--black); }
 .st-output { white-space: pre-wrap; word-break: break-word; font: inherit; line-height: 1.65; font-size: 0.98rem; margin: 0; }
+.st-result {
+  background: linear-gradient(145deg, #ffffff 0%, #f5f3ff 100%);
+  border-color: #ddd6fe;
+  box-shadow: 0 8px 28px rgba(79, 70, 229, 0.08);
+}
+.st-result-bar {
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e9d5ff;
+}
+.st-result-bar .st-label {
+  color: #5b21b6;
+  font-size: 0.9rem;
+}
+.st-result .st-output {
+  padding: 16px;
+  border: 1px solid rgba(221, 214, 254, 0.8);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.84);
+}
 .st-btn:focus-visible, .st-mini:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; }
 @media (max-width: 520px) { .st-row { grid-template-columns: 1fr; } .st-page { padding: 0 14px 40px; } }
 

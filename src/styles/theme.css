@@ -15,58 +15,70 @@ html:root {
   --radius: 14px;
 }
 
-/* One palette for all tools: every accent colour is the root black on neutral surfaces.
-   Green (success) and red (error) keep their meaning. */
+/* Shared semantic accents keep results vivid while retaining readable text contrast. */
 html:root {
-  --blue: #0a0a0a;
-  --blue-bg: #f2f2ef;
-  --blue-bd: #e4e4e0;
-  --violet: #0a0a0a;
-  --violet-bg: #f2f2ef;
-  --violet-bd: #e4e4e0;
-  --orange: #0a0a0a;
-  --orange-bg: #f2f2ef;
-  --orange-bd: #e4e4e0;
-  --amber: #0a0a0a;
-  --amber-bg: #f2f2ef;
-  --amber-bd: #e4e4e0;
-  --emerald: #0a0a0a;
-  --emerald-bg: #f2f2ef;
-  --emerald-bd: #e4e4e0;
-  --teal: #0a0a0a;
-  --teal-bg: #f2f2ef;
-  --teal-bd: #e4e4e0;
-  --rose: #0a0a0a;
-  --rose-bg: #f2f2ef;
-  --rose-bd: #e4e4e0;
-  --indigo: #0a0a0a;
-  --indigo-bg: #f2f2ef;
-  --indigo-bd: #e4e4e0;
-  --sky: #0a0a0a;
-  --sky-bg: #f2f2ef;
-  --sky-bd: #e4e4e0;
-  --li-blue: #0a0a0a;
-  --li-blue-bg: #f2f2ef;
-  --li-blue-bd: #e4e4e0;
-  --fg-violet: #0a0a0a;
-  --fg-violet-bg: #f2f2ef;
-  --fg-violet-bd: #e4e4e0;
-  --fg-amber: #0a0a0a;
-  --fg-amber-bg: #f2f2ef;
-  --fg-amber-bd: #e4e4e0;
-  --fg-indigo: #0a0a0a;
-  --fg-indigo-bg: #f2f2ef;
-  --fg-indigo-bd: #e4e4e0;
-  --fg-accent: #0a0a0a;
-  --fg-accent-bg: #f2f2ef;
-  --fg-accent-bd: #e4e4e0;
-  --accent: #0a0a0a;
-  --emerald-dk: #0a0a0a;
-  --fg-accent-dk: #0a0a0a;
-  --code-bg: #f2f2ef;
+  --blue: #2563eb;
+  --blue-bg: #eff6ff;
+  --blue-bd: #bfdbfe;
+  --violet: #7c3aed;
+  --violet-bg: #f5f3ff;
+  --violet-bd: #ddd6fe;
+  --orange: #ea580c;
+  --orange-bg: #fff7ed;
+  --orange-bd: #fed7aa;
+  --amber: #d97706;
+  --amber-bg: #fffbeb;
+  --amber-bd: #fde68a;
+  --emerald: #059669;
+  --emerald-bg: #ecfdf5;
+  --emerald-bd: #a7f3d0;
+  --teal: #0d9488;
+  --teal-bg: #f0fdfa;
+  --teal-bd: #99f6e4;
+  --rose: #e11d48;
+  --rose-bg: #fff1f2;
+  --rose-bd: #fecdd3;
+  --indigo: #4f46e5;
+  --indigo-bg: #eef2ff;
+  --indigo-bd: #c7d2fe;
+  --sky: #0284c7;
+  --sky-bg: #f0f9ff;
+  --sky-bd: #bae6fd;
+  --li-blue: #0a66c2;
+  --li-blue-bg: #eff6ff;
+  --li-blue-bd: #bfdbfe;
+  --fg-violet: #7c3aed;
+  --fg-violet-bg: #f5f3ff;
+  --fg-violet-bd: #ddd6fe;
+  --fg-amber: #d97706;
+  --fg-amber-bg: #fffbeb;
+  --fg-amber-bd: #fde68a;
+  --fg-indigo: #4f46e5;
+  --fg-indigo-bg: #eef2ff;
+  --fg-indigo-bd: #c7d2fe;
+  --fg-accent: #0d9488;
+  --fg-accent-bg: #f0fdfa;
+  --fg-accent-bd: #99f6e4;
+  --accent: #2563eb;
+  --emerald-dk: #047857;
+  --fg-accent-dk: #0f766e;
+  --code-bg: #f8fafc;
   --font-mono: var(--font-manrope), "Manrope", monospace;
 }
 html, body { background: var(--white); }
+
+#root table thead {
+  background: linear-gradient(90deg, #eff6ff, #f5f3ff);
+}
+#root table thead th {
+  color: #1e3a8a;
+}
+#root table tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+#root table tbody tr:hover {
+  background: #eff6ff;
+}
 
 #root .ac-page,
 #root .b64-page,
