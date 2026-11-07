@@ -26,7 +26,10 @@ const manrope = localFont({
 // Site-wide defaults. Each page overrides title/description/canonical/OG via its own `metadata` export.
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: `Free Online Tools | ${SITE_NAME}`,
+  title: {
+    default: `Free Online Tools | ${SITE_NAME}`,
+    template: `%s | ${SITE_NAME}`,
+  },
   description: DEFAULT_DESCRIPTION,
   applicationName: SITE_NAME,
   authors: [{ name: SITE_NAME }],

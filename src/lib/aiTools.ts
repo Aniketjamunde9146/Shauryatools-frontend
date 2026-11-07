@@ -299,6 +299,7 @@ export function buildAIPrompt(
     ...details,
     cfg.showTone ? `Tone: ${tone}` : "",
     `Language: write the whole answer in ${language}.`,
+    "Formatting: use clean Markdown for readable structure—descriptive headings for multi-section answers, short paragraphs, and bullets or numbered steps where useful. Preserve any exact output format requested by the task, including one-line, hashtag, bio, code, or document outputs.",
     "Rules: return only the final result. No preface, no explanation of your process, no code fences around the whole answer.",
   ].filter(Boolean).join("\n");
 }

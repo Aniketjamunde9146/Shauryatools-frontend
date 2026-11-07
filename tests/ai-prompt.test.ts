@@ -32,6 +32,12 @@ describe("AI tool prompt builder", () => {
     }
   });
 
+  it("requests readable structure without overriding exact output formats", () => {
+    const prompt = buildAIPrompt(AI_TOOLS["hashtag-generator"], {}, TONES[0], "English");
+    expect(prompt).toContain("descriptive headings for multi-section answers");
+    expect(prompt).toContain("Preserve any exact output format requested by the task");
+  });
+
   it("has exactly the 15 writing tools with tone, and every tool offers language", () => {
     const withTone = Object.entries(AI_TOOLS).filter(([, cfg]) => cfg.showTone).map(([slug]) => slug).sort();
     expect(withTone).toEqual([...toneTools].sort());

@@ -5,6 +5,7 @@ import { generateAI } from "@/lib/api";
 import { AI_TOOLS, LANGUAGES, TONES, buildAIPrompt, type AIField, type AIToolConfig } from "@/lib/aiTools";
 import { tools } from "@/data/toolsData";
 import SnakeLoader from "@/components/SnakeLoader";
+import AIResultContent from "@/components/AIResultContent";
 import "./SimpleAITool.css";
 
 const NOT_SPECIFIED = "";
@@ -33,6 +34,7 @@ export default function SimpleAITool({ slug }: { slug: string }) {
   const [result, setResult] = useState("");
   const [copied, setCopied] = useState(false);
   const resultRef = useRef<HTMLDivElement>(null);
+  const resultWordCount = result.trim().split(/\s+/).filter(Boolean).length;
 
   // A different tool starts with a clean form.
   useEffect(() => {
@@ -213,13 +215,21 @@ export default function SimpleAITool({ slug }: { slug: string }) {
         {result && (
           <div className="st-card st-result" ref={resultRef}>
             <div className="st-result-bar">
-              <span className="st-label">Result</span>
+              <div className="st-result-title-wrap">
+                <span className="st-result-kicker">AI GENERATED</span>
+                <h2 className="st-result-title">Your result</h2>
+              </div>
               <div className="st-actions">
-                <button type="button" className="st-mini" onClick={copy}>{copied ? "Copied" : "Copy"}</button>
-                <button type="button" className="st-mini" onClick={run} disabled={loading}>Regenerate</button>
+                <span className="st-result-count">{resultWordCount} words</span>
+                <button type="button" className="st-mini" onClick={copy} aria-live="polite">
+                  {copied ? "Copied" : "Copy"}
+                </button>
+                <button type="button" className="st-mini st-regenerate" onClick={run} disabled={loading}>
+                  {loading ? "Generating…" : "Regenerate"}
+                </button>
               </div>
             </div>
-            <pre className="st-output">{result}</pre>
+            <AIResultContent text={result} />
           </div>
         )}
       </div>

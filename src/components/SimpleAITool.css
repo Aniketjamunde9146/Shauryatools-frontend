@@ -27,28 +27,71 @@
 .st-actions { display: flex; gap: 8px; }
 .st-mini { height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--grey-2); background: transparent; color: inherit; font: inherit; font-size: 0.82rem; font-weight: 600; cursor: pointer; }
 .st-mini:hover:not(:disabled) { border-color: var(--black); }
-.st-output { white-space: pre-wrap; word-break: break-word; font: inherit; line-height: 1.65; font-size: 0.98rem; margin: 0; }
+.st-output { min-width: 0; display: flex; flex-direction: column; gap: 16px; white-space: normal; overflow-wrap: anywhere; font: inherit; line-height: 1.75; font-size: 0.98rem; margin: 0; }
 .st-result {
-  background: linear-gradient(145deg, #ffffff 0%, #f5f3ff 100%);
-  border-color: #ddd6fe;
-  box-shadow: 0 8px 28px rgba(79, 70, 229, 0.08);
+  gap: 18px;
+  padding: clamp(16px, 3vw, 26px);
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(224, 231, 255, .78), transparent 42%),
+    linear-gradient(145deg, #ffffff 0%, #f8faff 55%, #f5f3ff 100%);
+  border-color: #dbe4ff;
+  box-shadow: 0 12px 36px rgba(49, 46, 129, 0.09);
 }
 .st-result-bar {
-  padding-bottom: 12px;
-  border-bottom: 1px solid #e9d5ff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e0e7ff;
 }
-.st-result-bar .st-label {
-  color: #5b21b6;
-  font-size: 0.9rem;
+.st-result-title-wrap { display: grid; gap: 3px; }
+.st-result-kicker { color: #6366a8; font-size: .68rem; font-weight: 800; letter-spacing: .12em; }
+.st-result-title {
+  margin: 0;
+  color: #172554;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-weight: 800;
+  letter-spacing: -.025em;
+  line-height: 1.2;
 }
-.st-result .st-output {
-  padding: 16px;
-  border: 1px solid rgba(221, 214, 254, 0.8);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.84);
+.st-result .st-actions { align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+.st-result-count {
+  padding: 6px 9px;
+  border: 1px solid #dbe4ff;
+  border-radius: 999px;
+  background: rgba(255,255,255,.72);
+  color: #5b647f;
+  font-size: .75rem;
+  font-weight: 650;
 }
+.st-result .st-mini { border-color: #d7ddf2; background: rgba(255,255,255,.78); }
+.st-result .st-mini:hover:not(:disabled) { border-color: #818cf8; color: #3730a3; }
+.st-result .st-regenerate { border-color: #c7d2fe; background: #eef2ff; color: #3730a3; }
+.st-result .st-output { padding: clamp(16px, 3vw, 24px); border: 1px solid #e3e8f7; border-radius: 14px; background: rgba(255,255,255,.9); color: #27324a; }
+.st-output-heading { margin: 8px 0 -7px; color: #243b75; font-size: 1.15rem; font-weight: 800; letter-spacing: -.015em; line-height: 1.35; }
+.st-output-heading:first-child { margin-top: 0; }
+.st-output h2.st-output-heading { padding-bottom: 9px; border-bottom: 1px solid #e7eaf5; font-size: 1.3rem; }
+.st-output h3.st-output-heading { color: #4338a6; font-size: 1.08rem; }
+.st-output h4.st-output-heading { color: #475569; font-size: .98rem; }
+.st-output-paragraph { margin: 0; }
+.st-output-paragraph strong, .st-output-list strong { color: #243b75; font-weight: 750; }
+.st-output-list { display: grid; gap: 8px; margin: 0; padding-left: 1.55rem; }
+.st-output-list li { padding-left: 3px; }
+.st-output-list li::marker { color: #6366d9; font-weight: 750; }
+.st-output-quote { margin: 0; padding: 12px 16px; border-left: 3px solid #818cf8; border-radius: 0 10px 10px 0; background: #f3f5ff; color: #414b70; }
+.st-inline-code { padding: .12em .4em; border: 1px solid #e4e7ef; border-radius: 5px; background: #f1f3f8; color: #4338a6; font-family: var(--font-mono); font-size: .88em; }
+.st-output-code { min-width: 0; margin: 0; overflow: hidden; border: 1px solid #27334e; border-radius: 11px; background: #111827; color: #e2e8f0; }
+.st-output-code figcaption { padding: 7px 12px; border-bottom: 1px solid #334155; background: #1e293b; color: #c7d2fe; font-family: var(--font-mono); font-size: .72rem; }
+.st-output-code pre { max-width: 100%; margin: 0; padding: 14px; overflow-x: auto; white-space: pre; font-family: var(--font-mono); font-size: .86rem; line-height: 1.65; }
+.st-output-code code { font: inherit; }
+.st-output :not(pre) > code { white-space: normal; }
 .st-btn:focus-visible, .st-mini:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; }
 @media (max-width: 520px) { .st-row { grid-template-columns: 1fr; } .st-page { padding: 0 14px 40px; } }
+@media (max-width: 600px) {
+  .st-result-bar { align-items: flex-start; flex-direction: column; }
+  .st-result .st-actions { justify-content: flex-start; }
+}
 
 /* Per-tool fields (src/lib/aiTools.ts). One column on phones; two columns on wider screens.
    Textareas always take the full width. Input text is 16px so iOS does not zoom in. */

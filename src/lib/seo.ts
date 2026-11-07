@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { tools } from "@/data/toolsData";
+import { tools } from "@/lib/tools";
+import type { ToolEntry } from "@/lib/tools";
 import { SEARCH_KEYWORDS } from "@/data/searchKeywords";
-import { getToolContent } from "@/lib/toolContent";
 import { getGroup } from "@/lib/toolMeta";
 import { SITE_URL } from "@/lib/site";
 
@@ -23,7 +23,7 @@ export interface PageSEO {
   other?: Record<string, string>;
 }
 
-export function findTool(pathname: string) {
+export function findTool(pathname: string): ToolEntry | undefined {
   return tools.find((item) => `/${item.slug}` === pathname);
 }
 
@@ -36,10 +36,12 @@ export function getKeywords(pathname: string): string | undefined {
 
 export function buildMetadata(pathname: string, seo: PageSEO = {}): Metadata {
   const tool = findTool(pathname);
-  const canonical = seo.canonical ?? `${SITE_URL}${pathname}`;
+  const canonical = tool ? `${SITE_URL}/${tool.slug}` : seo.canonical ?? `${SITE_URL}${pathname}`;
   const title =
-    seo.title ?? (tool ? `${tool.name} | Free Online Tool | ${SITE_NAME}` : `Free Online Tools | ${SITE_NAME}`);
-  const description = seo.description ?? tool?.description ?? DEFAULT_DESCRIPTION;
+    tool
+      ? `${tool.name} | Free Online Tool | ${SITE_NAME}`
+      : seo.title ?? `Free Online Tools | ${SITE_NAME}`;
+  const description = tool?.shortDescription ?? seo.description ?? DEFAULT_DESCRIPTION;
   const image = { url: `${SITE_URL}/og-image.png`, alt: `${title} - ${SITE_NAME}` };
 
   return {
@@ -47,7 +49,7 @@ export function buildMetadata(pathname: string, seo: PageSEO = {}): Metadata {
     description,
     keywords: seo.keywords ?? getKeywords(pathname),
     authors: seo.author ? [{ name: seo.author }] : undefined,
-    robots: seo.robots,
+    robots: tool ? { index: tool.indexable, follow: true } : seo.robots,
     alternates: { canonical },
     openGraph: {
       type: (seo.og?.type ?? (pathname === "/" ? "website" : "article")) as "website" | "article",
@@ -69,15 +71,14 @@ export function buildMetadata(pathname: string, seo: PageSEO = {}): Metadata {
 
 /**
  * Site-wide schema.org graph: WebPage, BreadcrumbList, WebSite, Organization, plus (for tools)
- * a WebApplication and an FAQPage whose questions are the same ones shown on the page.
+ * a WebApplication. FAQPage markup is emitted alongside the visible FAQ content.
  * `includeApp: false` lets a page supply its own, more specific WebApplication without duplicating it.
  */
 export function buildGraph(pathname: string, { includeApp = true }: { includeApp?: boolean } = {}) {
   const tool = findTool(pathname);
   const canonical = `${SITE_URL}${pathname}`;
   const title = tool ? `${tool.name} | Free Online Tool | ${SITE_NAME}` : `Free Online Tools | ${SITE_NAME}`;
-  const description = tool?.description || DEFAULT_DESCRIPTION;
-  const content = tool ? getToolContent(tool) : null;
+  const description = tool?.shortDescription || DEFAULT_DESCRIPTION;
 
   const breadcrumb = tool
     ? {
@@ -136,19 +137,6 @@ export function buildGraph(pathname: string, { includeApp = true }: { includeApp
               isAccessibleForFree: true,
               offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
               provider: { "@id": `${SITE_URL}/#organization` },
-            },
-          ]
-        : []),
-      ...(content
-        ? [
-            {
-              "@type": "FAQPage",
-              "@id": `${canonical}#faq`,
-              mainEntity: content.faqs.map((faq) => ({
-                "@type": "Question",
-                name: faq.question,
-                acceptedAnswer: { "@type": "Answer", text: faq.answer },
-              })),
             },
           ]
         : []),

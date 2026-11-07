@@ -1,16 +1,19 @@
 import type { MetadataRoute } from "next";
-import { tools } from "@/data/toolsData";
+import { tools } from "@/lib/tools";
 import { SITE_URL } from "@/lib/seo";
 
-// Dates are left out on purpose: a fake "last modified" is worse than none.
 export default function sitemap(): MetadataRoute.Sitemap {
+  const now = new Date();
+
   return [
-    { url: `${SITE_URL}/`, changeFrequency: "weekly", priority: 1 },
-    { url: `${SITE_URL}/about`, changeFrequency: "monthly", priority: 0.5 },
-    ...tools.map((tool) => ({
+    { url: `${SITE_URL}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
+    { url: `${SITE_URL}/tools`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${SITE_URL}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+    ...tools.filter((tool) => tool.indexable).map((tool) => ({
       url: `${SITE_URL}/${tool.slug}`,
+      lastModified: now,
       changeFrequency: "monthly" as const,
-      priority: 0.8,
+      priority: 0.6,
     })),
   ];
 }

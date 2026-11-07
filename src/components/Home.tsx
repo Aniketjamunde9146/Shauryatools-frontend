@@ -136,6 +136,7 @@ const Home = () => {
               <em>for everyday work.</em>
             </h1>
             <p className="hp-sub">Pick a tool and get it done. No sign-up needed.</p>
+            <p className="hp-sub"><Link href="/tools">Browse all tools by category</Link></p>
 
             {/* Search */}
             <div className="hp-search-wrap">
